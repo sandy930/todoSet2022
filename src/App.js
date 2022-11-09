@@ -1,23 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from "react";
+import { useGlobalContext } from "./context";
 function App() {
+  const {setTodo,todo,todoList,setTodoList}=useGlobalContext()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="text" placeholder="Enter a todo" onChange={(e)=>setTodo(e.target.value)}/>
+      <button onClick={()=>setTodoList([...todoList,todo])}>Add todo</button>
+      {todoList?.map(item=><li>{item}</li>)}
+
     </div>
   );
 }
